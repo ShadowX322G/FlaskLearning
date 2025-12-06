@@ -9,11 +9,17 @@ app = Flask(__name__)
 Scss(app)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
+app.config["SQLALCHEMY_BINDS"] = {
+
+    'tasks': "sqlite:///tasks.db"
+    
+}
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
 # Data Class ~ Row of Data
 class MyTask(db.Model):
+    __bind_key__ = 'tasks'
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(100), nullable=False)
     complete = db.Column(db.Integer, default=0)

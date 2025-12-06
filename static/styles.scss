@@ -5,7 +5,7 @@ $primary-hover-color: darken($primary-color,20%);
 $success-color: #28a745;
 $success-hover-color: darken($success-color,20%);
 $title-color: #ffffff;
-$bg-color: #022400;
+$bg-color: #e1ae84;
 
 
 body{
@@ -17,9 +17,9 @@ body{
     }
 
     h1{
-        color: white;
+        color: #FDF8F4;
         display: inline-block;
-        background-color: $bg-color;
+        background-color: #D9A474;
         border-radius: 20px;
         padding: 8px 116px;
         margin: 5px;
@@ -34,7 +34,7 @@ body{
     max-width: 800px;
     margin: 50px auto;
     padding: 20px;
-    background-color: #000000;
+    background-color: #1E1E1E;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -49,15 +49,19 @@ body{
 
         th, td{
             padding: 10px;
-            border: 1px solid #ddd;
+            border: 1px solid #3A3A3A;
         }
 
         th{
-            background-color: darken($bg-color,10%);
+            background-color: #C89163;
+            color: #F5F5F5
         }
 
-        tr:hover{
-            background-color: lighten(#000000, 10%);
+        tr{
+            background-color: #121212;
+            &:hover{
+                background-color: lighten(#121212, 10%);
+            }
         }
     }
     form{
@@ -65,11 +69,13 @@ body{
         padding: 20px 0;
 
         input[type="text"]{
+            background-color: #FFFFFF;
             width: 70%;
             padding: 10px;
             margin-right: 10px;
-            border: 1px solid #ccc;
+            border: 1px solid #C89163;
             border-radius: 5px;
+            color: #2A2A2A;
         }
 
         #btn_add, #btn_edit{
@@ -81,10 +87,10 @@ body{
         }
 
         #btn_add{
-            background-color: $success-color;
+            background-color: #3F8F55;
 
             &:hover{
-                background-color: $success-hover-color;
+                background-color: lighten(#3F8F55, 10%);
             }
         }
 
@@ -109,12 +115,21 @@ body{
         background-color: darken($primary-color, 10%);
         }
         &#delete {
-            background-color: #ff0000;
-            color: white;
+            background-color: #C0392B;
+            color: #FFFFFF;
             padding: 5px 10px;
             border-radius: 5px;
             &:hover {
-                background-color: darken(#ff0000, 10%);
+                background-color: #A83225;
+            }
+        }
+        &#edit {
+            background-color: #2E8B8B;
+            color: #FFFFFF;
+            padding: 5px 10px;
+            border-radius: 5px;
+            &:hover {
+                background-color: #257575;
             }
         }
     }

@@ -1,5 +1,5 @@
 body {
-  background-color: #022400;
+  background-color: #e1ae84;
 }
 
 body h2 {
@@ -9,9 +9,9 @@ body h2 {
 }
 
 body h1 {
-  color: white;
+  color: #FDF8F4;
   display: inline-block;
-  background-color: #022400;
+  background-color: #D9A474;
   border-radius: 20px;
   padding: 8px 116px;
   margin: 5px;
@@ -26,7 +26,7 @@ body h2 {
   max-width: 800px;
   margin: 50px auto;
   padding: 20px;
-  background-color: #000000;
+  background-color: #1E1E1E;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: center;
@@ -44,15 +44,20 @@ body h2 {
 
 .content table th, .content table td {
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid #3A3A3A;
 }
 
 .content table th {
-  background-color: black;
+  background-color: #C89163;
+  color: #F5F5F5;
+}
+
+.content table tr {
+  background-color: #121212;
 }
 
 .content table tr:hover {
-  background-color: #1a1a1a;
+  background-color: #2c2c2c;
 }
 
 .content form {
@@ -60,11 +65,13 @@ body h2 {
 }
 
 .content form input[type="text"] {
+  background-color: #FFFFFF;
   width: 70%;
   padding: 10px;
   margin-right: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #C89163;
   border-radius: 5px;
+  color: #2A2A2A;
 }
 
 .content form #btn_add, .content form #btn_edit {
@@ -76,11 +83,11 @@ body h2 {
 }
 
 .content form #btn_add {
-  background-color: #28a745;
+  background-color: #3F8F55;
 }
 
 .content form #btn_add:hover {
-  background-color: #145523;
+  background-color: #4fb26a;
 }
 
 .content form #btn_edit {
@@ -107,12 +114,23 @@ body h2 {
 }
 
 .content a#delete {
-  background-color: #ff0000;
-  color: white;
+  background-color: #C0392B;
+  color: #FFFFFF;
   padding: 5px 10px;
   border-radius: 5px;
 }
 
 .content a#delete:hover {
-  background-color: #cc0000;
+  background-color: #A83225;
+}
+
+.content a#edit {
+  background-color: #2E8B8B;
+  color: #FFFFFF;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.content a#edit:hover {
+  background-color: #257575;
 }
