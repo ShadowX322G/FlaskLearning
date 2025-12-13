@@ -16,5 +16,11 @@ jobs:
       - name: Build Docker image
         run: docker build -t task-smash .
 
+      - name: Run Trivy vulnerability scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: task-smash
+          severity: HIGH,CRITICAL
+
       - name: Run tests
         run: docker run task-smash pytest || true
