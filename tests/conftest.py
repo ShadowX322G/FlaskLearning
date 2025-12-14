@@ -12,7 +12,7 @@ def test_app():
 
     yield
 
-    assert "tasks.db" not in os.getenv("TASKS_DATABASE_URI", "")
+    assert os.getenv("TASKS_DATABASE_URI") != "sqlite:///tasks.db"
 
     # cleanup
     for db_file in ("test_base.db", "test_tasks.db"):
