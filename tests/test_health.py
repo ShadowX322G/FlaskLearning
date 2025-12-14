@@ -6,7 +6,7 @@ def test_health_endpoint():
     res = client.get("/health")
     assert res.status_code ==200
     assert res.json["status"] == "ok"
-    
+
 def test_create_and_delete_task():
     client = app.test_client()
 
@@ -24,5 +24,5 @@ def test_create_and_delete_task():
         assert task is not None
 
         # DELETE
-        client.post(f"/delete/{task.id}", follow_redirects=True)
+        client.get(f"/delete/{task.id}", follow_redirects=True)
         assert MyTask.query.count() == 0    
