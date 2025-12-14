@@ -19,9 +19,11 @@ def test_create_and_delete_task():
         assert response.status_code == 200
         assert b"Test Task" in response.data
 
-        # READ
+        # READ from DB
         task = MyTask.query.first()
         assert task is not None
+        assert task.content == "Test Task"
+
 
         # DELETE
         client.get(f"/delete/{task.id}", follow_redirects=True)
