@@ -6,13 +6,16 @@ def test_health_endpoint():
     res = client.get("/health")
     assert res.status_code ==200
     assert res.json["status"] == "ok"
-
+    
 def test_create_and_delete_task():
     client = app.test_client()
 
     with app.app_context():
         # CREATE
-        response = client.post("/", data={"content": "Test Task"}, follow_redirects=True)
+        response = client.post("/", data={
+            "form_type": "task",
+            "content": "Test Task"
+        }, follow_redirects=True)
         assert response.status_code == 200
 
         # READ from DB
@@ -22,4 +25,4 @@ def test_create_and_delete_task():
 
         # DELETE
         client.get(f"/delete/{task.id}", follow_redirects=True)
-        assert MyTask.query.count() == 0  
+        assert MyTask.query.count() == 0
