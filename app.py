@@ -1,11 +1,9 @@
-# imports
 import os
 from flask import Flask, render_template, redirect, request
 from flask_scss import Scss
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
-# my app
 app = Flask(__name__)
 Scss(app)
 
@@ -16,16 +14,13 @@ app.config["SQLALCHEMY_DATABASE_URI"] = BASE_DB
 app.config["SQLALCHEMY_BINDS"] = {
     'tasks': TASKS_DB
 }
-
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
 db = SQLAlchemy(app)
 
-with app.app_context():
-    # create tables for all binds
-    db.create_all(bind='tasks')  # for MyTask
-
-
-# Data Class ~ Row of Data
+# ----------------------------
+# Models
+# ----------------------------
 class MyTask(db.Model):
     __bind_key__ = 'tasks'
     id = db.Column(db.Integer, primary_key=True)
@@ -33,70 +28,67 @@ class MyTask(db.Model):
     complete = db.Column(db.Integer, default=0)
     updated = db.Column(db.DateTime, default=datetime.utcnow)
 
-    def __repr__(self) -> str:
+    def __repr__(self):
         return f"<Task {self.id}>"
-    
-def init_db():
-    with app.app_context():
-        db.create_all()
 
-# Routes to Webpages
-# Home Page
+# ----------------------------
+# Initialize tables (after models!)
+# ----------------------------
+with app.app_context():
+    db.create_all(bind=None)      # default DB
+    db.create_all(bind='tasks')   # tasks bind
+
+# ----------------------------
+# Routes
+# ----------------------------
 @app.route('/', methods=['GET', 'POST'])
 def index():
-
-    #Add a Task
     if request.method == 'POST': 
-        if not request.form['content'].strip():
+        content = request.form['content'].strip()
+        if not content:
             return redirect('/')
-        else:
-            current_task = request.form['content']
-        new_task = MyTask(content = current_task)
+        new_task = MyTask(content=content)
         try:
             db.session.add(new_task)
             db.session.commit()
             return redirect('/')
         except Exception as e:
-            print(f"ERROR:{e}")
-            return(f"ERROR:{e}")
-        
-    # See all current Tasks
+            print(f"ERROR: {e}")
+            return f"ERROR: {e}"
     else:
         tasks = MyTask.query.order_by(MyTask.updated).all()
         return render_template('index.html', tasks=tasks)
 
-# Delete an Item
 @app.route("/delete/<int:id>")
-def delete(id:int):
-    delete_task = MyTask.query.get_or_404(id)
+def delete(id):
+    task = MyTask.query.get_or_404(id)
     try:
-        db.session.delete(delete_task)
+        db.session.delete(task)
         db.session.commit()
         return redirect("/")
     except Exception as e:
-        return(f"ERROR:{e}")
+        return f"ERROR: {e}"
 
-# Edit an Item
 @app.route("/edit/<int:id>", methods=['GET', 'POST'])
-def edit(id:int):
-    edit_task = MyTask.query.get_or_404(id)
+def edit(id):
+    task = MyTask.query.get_or_404(id)
     if request.method == 'POST':
-        edit_task.content = request.form['content']
-        edit_task.updated = datetime.utcnow()
+        task.content = request.form['content']
+        task.updated = datetime.utcnow()
         try:
             db.session.commit()
             return redirect("/")
         except Exception as e:
-            return(f"ERROR:{e}")
+            return f"ERROR: {e}"
     else:
-        return render_template('edit.html', task=edit_task)
-
+        return render_template('edit.html', task=task)
 
 @app.route("/health")
 def healthcheck():
     return {"status": "ok"}
 
-# Runner and Debugger
-if __name__ == '__main__':
-    init_db()
+# ----------------------------
+# Run
+# ----------------------------
+if __name__ == "__main__":
     app.run(debug=True)
