@@ -21,7 +21,9 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
 with app.app_context():
-    db.create_all()
+    # create tables for all binds
+    db.create_all(bind='tasks')  # for MyTask
+
 
 # Data Class ~ Row of Data
 class MyTask(db.Model):
