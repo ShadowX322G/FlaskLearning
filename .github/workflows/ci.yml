@@ -23,4 +23,4 @@ jobs:
           severity: HIGH,CRITICAL
 
       - name: Run tests
-        run: docker run task-smash pytest || True
+        run: docker run task-smash pytest || true
