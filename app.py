@@ -1,4 +1,5 @@
 # imports
+import os
 from flask import Flask, render_template, redirect, request
 from flask_scss import Scss
 from flask_sqlalchemy import SQLAlchemy
@@ -8,12 +9,14 @@ from datetime import datetime
 app = Flask(__name__)
 Scss(app)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
-app.config["SQLALCHEMY_BINDS"] = {
+BASE_DB = os.getenv("BASE_DATABASE_URI", "sqlite:///database.db")
+TASKS_DB = os.getenv("TASKS_DATABASE_URI", "sqlite:///tasks.db")
 
-    'tasks': "sqlite:///tasks.db"
-    
+app.config["SQLALCHEMY_DATABASE_URI"] = BASE_DB
+app.config["SQLALCHEMY_BINDS"] = {
+    'tasks': TASKS_DB
 }
+
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
@@ -28,8 +31,9 @@ class MyTask(db.Model):
     def __repr__(self) -> str:
         return f"<Task {self.id}>"
     
-with app.app_context():
-    db.create_all()
+def init_db():
+    with app.app_context():
+        db.create_all()
 
 # Routes to Webpages
 # Home Page
@@ -89,4 +93,5 @@ def healthcheck():
 
 # Runner and Debugger
 if __name__ == '__main__':
+    init_db()
     app.run(debug=True)
