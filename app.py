@@ -83,6 +83,10 @@ def edit(id:int):
         return render_template('edit.html', task=edit_task)
 
 
+@app.route("/health")
+def healthcheck():
+    return {"status": "ok"}
+
 # Runner and Debugger
 if __name__ == '__main__':
     app.run(debug=True)
