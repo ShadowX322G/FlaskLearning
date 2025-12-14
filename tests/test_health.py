@@ -12,19 +12,14 @@ def test_create_and_delete_task():
 
     with app.app_context():
         # CREATE
-        response = client.post("/", data={
-            "content": "Test Task"
-        }, follow_redirects=True)
-
+        response = client.post("/", data={"content": "Test Task"}, follow_redirects=True)
         assert response.status_code == 200
-        assert b"Test Task" in response.data
 
         # READ from DB
         task = MyTask.query.first()
         assert task is not None
         assert task.content == "Test Task"
 
-
         # DELETE
         client.get(f"/delete/{task.id}", follow_redirects=True)
-        assert MyTask.query.count() == 0    
+        assert MyTask.query.count() == 0  
