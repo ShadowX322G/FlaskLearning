@@ -1,4 +1,4 @@
-from app import app
+from app import app, MyTask
 import sqlite3
 import os
 def test_health_endpoint():
@@ -13,7 +13,7 @@ def test_database_access():
     cursor = conn.cursor()
     cursor.execute("SELECT 1")
     conn.close()
-    
+
 def test_create_and_delete_task():
     client = app.test_client()
 
@@ -25,10 +25,10 @@ def test_create_and_delete_task():
     assert response.status_code == 200
     assert b"Test Task" in response.data
 
-    # GET task ID from DB
-    from app import MyTask
-    task = MyTask.query.first()
-    assert task is not None
+    # READ (inside app context)
+    with app.app_context():
+        task = MyTask.query.first()
+        assert task is not None
 
     # DELETE (GET /delete/<id>)
     response = client.get(f"/delete/{task.id}", follow_redirects=True)
