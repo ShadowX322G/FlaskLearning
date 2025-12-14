@@ -33,12 +33,14 @@ class MyTask(db.Model):
 
 # ----------------------------
 # Initialize tables (after models!)
-# ----------------------------
 with app.app_context():
-    db.create_all(bind=None)      # default DB
-    db.create_all(bind='tasks')   # tasks bind
+    # default DB
+    db.create_all()
 
-# ----------------------------
+    # tasks DB
+    engine = db.get_engine(app, bind='tasks')
+    db.metadata.create_all(bind=engine)
+
 # Routes
 # ----------------------------
 @app.route('/', methods=['GET', 'POST'])
