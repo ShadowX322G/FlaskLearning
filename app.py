@@ -20,6 +20,9 @@ app.config["SQLALCHEMY_BINDS"] = {
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
+with app.app_context():
+    db.create_all()
+
 # Data Class ~ Row of Data
 class MyTask(db.Model):
     __bind_key__ = 'tasks'
