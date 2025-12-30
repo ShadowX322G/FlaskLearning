@@ -4,67 +4,90 @@
 {% endblock %}
 
 {% block content %}
-<div class="content">
-    <h1>Task Smash</h1>
+<div class = "dashboard-container">
+    <button id="toggle-task" class="toggle-btn">➤</button>
 
-    <!-- TASKS TABLE -->
-    {% if tasks|length < 1 %}
-        <h2>No tasks yet. Add one below!</h2>
-    {% else %}
-    <table>
-        <tr>
-            <th>Task</th>
-            <th>Updated</th>
-            <th>Actions</th>
-        </tr>
-        {% for task in tasks %}
-        <tr onclick='window.location="/edit/{{task.id}}"' >
-            <td>{{ task.content }}</td>
-            <td>{{ task.updated.strftime("%H-%M-%S") }}</td>
-            <td>
-                <a href="/delete/{{task.id}}" id="delete">Delete</a>
-                <br/>
-                <a href="/edit/{{task.id}}" id="edit">Edit</a>
-            </td>
-        </tr>
+    <div class="left-panel">
+        <h1>Task Smash</h1>
+
+        <!-- TASKS TABLE -->
+        {% if tasks|length < 1 %}
+            <h2>No tasks yet. Add one below!</h2>
+        {% else %}
+        <table>
+            <tr class = "table-title">
+                <th>Task</th>
+                <th>Updated</th>
+                <th>Actions</th>
+            </tr>
+            {% for task in tasks %}
+            <tr onclick='window.location="/edit/{{task.id}}"' >
+                <td>{{ task.content }}</td>
+                <td>{{ task.updated.strftime("%H-%M-%S") }}</td>
+                <td>
+                    <a href="/delete/{{task.id}}" id="delete">Delete</a>
+                    <br/>
+                    <a href="/edit/{{task.id}}" id="edit">Edit</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+
+        <form action="/" method="POST">
+            <input type="hidden" name="form_type" value="task">
+            <input type="text" name="content" placeholder="Add Task" required/>
+            <input type="submit" value="Add Task"/>
+        </form>
+
+        <hr>
+    </div>
+
+    <div class="right-panel">
+
+        <!-- SPENDING CHART -->
+        <h1>Spending or smn</h1>
+        <ul>
+        {% for i in range(categories|length) %}
+            <li>{{ categories[i] }}: ${{ amounts[i] }}</li>
         {% endfor %}
-    </table>
-    {% endif %}
+        </ul>
 
-    <form action="/" method="POST">
-        <input type="hidden" name="form_type" value="task">
-        <input type="text" name="content" placeholder="Add Task" required/>
-        <input type="submit" value="Add Task"/>
-    </form>
+        <form method="POST" action="{{ url_for('add_spending') }}">
+            <input type="hidden" name="form_type" value="spending">
+            <input type="text" name="category" placeholder="Category" required>
+            <input type="number" step="0.01" name="amount" placeholder="Amount" required>
+            <p></p>
+            <button type="submit">Add Spending</button>
+        </form>
 
-    <hr>
+        <canvas id="spendingChart" width="400" height="200"></canvas>
 
-    <!-- SPENDING CHART -->
-    <h1>Spending</h1>
-
-    <form method="POST" action="{{ url_for('add_spending') }}">
-        <input type="hidden" name="form_type" value="spending">
-        <input type="text" name="category" placeholder="Category" required>
-        <input type="number" step="0.01" name="amount" placeholder="Amount" required>
-        <button type="submit">Add Spending</button>
-    </form>
-
-    <canvas id="spendingChart" width="400" height="200"></canvas>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+        const ctx = document.getElementById('spendingChart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {{ categories|tojson }},
+                datasets: [{
+                    label: 'Spending by Category',
+                    data: {{ amounts|tojson }},
+                    backgroundColor: 'rgba(75, 192, 192, 0.6)'
+                }]
+            },
+            options: { responsive: true }
+        });
+        </script>
+    </div>
     <script>
-    const ctx = document.getElementById('spendingChart').getContext('2d');
-    const chart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: {{ categories|tojson }},
-            datasets: [{
-                label: 'Spending by Category',
-                data: {{ amounts|tojson }},
-                backgroundColor: 'rgba(75, 192, 192, 0.6)'
-            }]
-        },
-        options: { responsive: true }
+    const btn = document.getElementById("toggle-task");
+    const panel = document.querySelector(".left-panel");
+    const dashboardContainer = document.querySelector(".dashboard-container");
+
+    btn.addEventListener("click", () => {
+        panel.classList.toggle("open");
+        dashboardContainer.classList.toggle("left-open");
     });
     </script>
 </div>
