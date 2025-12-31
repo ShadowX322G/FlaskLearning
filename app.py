@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template, redirect, request
 from flask_scss import Scss
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import func
+from sqlalchemy import func, extract
 from datetime import datetime
 from flask_login import UserMixin, LoginManager, login_user, login_required, current_user, logout_user
 
@@ -105,44 +105,67 @@ def login():
 @app.route('/', methods=['GET', 'POST'])
 @login_required
 def index():
+    selected_month = int(request.args.get('filter_month', datetime.utcnow().month))
+    selected_year = int(request.args.get('filter_year', datetime.utcnow().year))
+
     if request.method == 'POST':
         form_type = request.form.get('form_type')
 
         if form_type == 'task':
             content = request.form['content'].strip()
             if content:
-                db.session.add(MyTask(content=content, user_id = current_user.id))
+                db.session.add(MyTask(content=content, user_id=current_user.id))
                 db.session.commit()
+            # redirect to keep current month/year filter
+            return redirect(f"/?filter_month={selected_month}&filter_year={selected_year}")
 
         elif form_type == 'spending':
             category = request.form['category'].strip()
             amount = float(request.form['amount'])
+            month = int(request.form['month'])
+            year = int(request.form['year'])
+            date = datetime(year, month, 1)
+
             if category and amount:
-                db.session.add(Spending(category=category, amount=amount, user_id = current_user.id))
+                db.session.add(Spending(category=category, amount=amount, date=date, user_id=current_user.id))
                 db.session.commit()
 
-        return redirect('/')
+            # redirect to the same month/year after adding
+            return redirect(f"/?filter_month={month}&filter_year={year}")
+
 
     # ----- TASKS GET -----
-    tasks = MyTask.query.filter_by(user_id = current_user.id).order_by(MyTask.updated).all()
+    tasks = MyTask.query.filter_by(user_id=current_user.id).order_by(MyTask.updated).all()
 
     # ----- SPENDING DATA -----
     data = (
-    db.session.query(
-        Spending.category,
-        db.func.sum(Spending.amount)
-    )
-    .filter_by(user_id=current_user.id)
-    .group_by(Spending.category)
-    .order_by(func.min(Spending.id))
-    .all()
+        db.session.query(
+            Spending.category,
+            db.func.sum(Spending.amount)
+        )
+        .filter_by(user_id=current_user.id)
+        .filter(extract('month', Spending.date) == selected_month)
+        .filter(extract('year', Spending.date) == selected_year)
+        .group_by(Spending.category)
+        .order_by(func.min(Spending.id))
+        .all()
     )
     categories = [row[0] for row in data]
     amounts = [row[1] for row in data]
 
     spendings = Spending.query.filter_by(user_id=current_user.id).all()
     spending_list = [(s.category, s.amount, s.id) for s in spendings]
-    return render_template('dashboard.html', tasks=tasks, data=data,  categories=categories, amounts=amounts, spending_list=spending_list)
+
+    return render_template(
+        'dashboard.html',
+        tasks=tasks,
+        data=data,
+        categories=categories,
+        amounts=amounts,
+        spending_list=spending_list,
+        selected_month=selected_month,
+        selected_year=selected_year
+    )
 
 @app.route('/delete/<string:type>/', methods=['POST'])
 @login_required
@@ -184,7 +207,11 @@ def healthcheck():
 def add_spending():
     category = request.form['category']
     amount = float(request.form['amount'])
-    db.session.add(Spending(category=category, amount=amount, user_id = current_user.id))
+    month = int(request.form['month'])
+    year = int(request.form['year'])
+
+    date = datetime(year, month, 1)  # store as first day of month
+    db.session.add(Spending(category=category, amount=amount, date=date, user_id=current_user.id))
     db.session.commit()
     return redirect('/')
 

@@ -117,7 +117,7 @@ body{
 
     .toggle-btn-container {
         position: fixed;
-        scale: 1;
+        transform: scale(1.5);
         top: 50%;
         left: -30px;
         transform: translateY(-50%);
@@ -126,12 +126,12 @@ body{
         cursor: pointer;
         z-index: 1100;
         font-size: 20px;
-        transition: left 0.3s ease, transform 0.3s ease, scale 0.3s ease;
+        transition: left 0.3s ease, transform 0.3s ease;
         &:hover {
             .toggle-btn {
                 background-color: darken(#C89163, 10%);
                 transform: scale(1.5);
-                transition: translation 0.3s ease, background-color 0.3s ease;
+                transition: transform 0.3s ease, background-color 0.3s ease;
             }
         }
     }
@@ -141,6 +141,7 @@ body{
         font-size: 20px;
         border: none;
         background: #C89163;
+        transition: background-color 0.3s ease, transform 0.3s ease;
         &:hover
         {
             cursor: pointer;

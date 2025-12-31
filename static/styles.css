@@ -91,7 +91,7 @@ body h2 {
 
 .dashboard-container .toggle-btn-container {
   position: fixed;
-  scale: 1;
+  transform: scale(1.5);
   top: 50%;
   left: -30px;
   transform: translateY(-50%);
@@ -100,13 +100,13 @@ body h2 {
   cursor: pointer;
   z-index: 1100;
   font-size: 20px;
-  transition: left 0.3s ease, transform 0.3s ease, scale 0.3s ease;
+  transition: left 0.3s ease, transform 0.3s ease;
 }
 
 .dashboard-container .toggle-btn-container:hover .toggle-btn {
   background-color: #b77741;
   transform: scale(1.5);
-  transition: translation 0.3s ease, background-color 0.3s ease;
+  transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .dashboard-container .toggle-btn {
@@ -115,6 +115,7 @@ body h2 {
   font-size: 20px;
   border: none;
   background: #C89163;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .dashboard-container .toggle-btn:hover {
