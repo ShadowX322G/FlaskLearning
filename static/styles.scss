@@ -42,19 +42,110 @@ body{
     // border-radius: 10px;
     // box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     // text-align: center;
+
+    .spending-item {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+        /* BIG invisible hover buffer */
+        padding: 6px;
+    }
+
+
+    .spending-label {
+        font-size: 16px;
+        color: #ffffff;
+        &:hover{
+            
+            }
+    }
+
+    .delete-spending-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 4px;
+        opacity: 0;
+        pointer-events: none;
+        color: #ff4d4d;
+        background: none;
+        border: none;
+        font-size: 16px;
+
+        /* fade in fast, fade out slow */
+        transition:
+            opacity 0.2s ease-in,
+            opacity 0.4s ease-out;
+    }
+    
+    .delete-spending-btn svg{
+        display: block;
+    }
+
+    .spending-item:hover .delete-spending-btn {
+        opacity: 1;
+        pointer-events: auto;
+        &:hover
+        {
+            color: darken(#ff4d4d, 10%);
+        }
+    }
+    
+
+
+    .logout-btn {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        background: #bc4538;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 10px;
+        cursor: pointer;
+        z-index: 1100;
+        font-size: 16px;
+        color: #ffffff;
+        transition: background-color 0.3s ease;
+        text-align: center;
+        text-height: 22px;
+        &:hover {
+            background-color: darken(#bc4538, 10%);
+        }
+    }
+
+    .toggle-btn-container {
+        position: fixed;
+        scale: 1;
+        top: 50%;
+        left: -30px;
+        transform: translateY(-50%);
+        border: none;
+        padding: 30px 30px;
+        cursor: pointer;
+        z-index: 1100;
+        font-size: 20px;
+        transition: left 0.3s ease, transform 0.3s ease, scale 0.3s ease;
+        &:hover {
+            .toggle-btn {
+                background-color: darken(#C89163, 10%);
+                transform: scale(1.5);
+                transition: translation 0.3s ease, background-color 0.3s ease;
+            }
+        }
+    }
     .toggle-btn {
-    position: fixed;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    background: #C89163;
-    border: none;
-    padding: 10px;
-    border-radius: 0 10px 10px 0;
-    cursor: pointer;
-    z-index: 1100;
-    font-size: 20px;
-    transition: left 0.3s ease, transform 0.3s ease;
+        border-radius: 0 10px 10px 0;
+        padding: 10px;
+        font-size: 20px;
+        border: none;
+        background: #C89163;
+        &:hover
+        {
+            cursor: pointer;
+            background-color: darken(#C89163, 10%);
+        }
     }
     .left-panel{
         position: fixed;
@@ -69,10 +160,82 @@ body{
         transition: left 0.3s ease;
         z-index: 1000;
 
+        .add-task-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .add-task-form .add-task-btn {
+            width: 100%;
+            background-color: $primary-color;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            color: #ffffff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: $primary-hover-color;
+            }
+        }
+
+        .task-controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;   
+        }
+        .task-controls button.delete-task-btn,
+        .task-controls a#edit {
+            margin: 0;              
+        }
+
+        .task-controls button.delete-task-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .task-controls a#edit {
+            margin-top: 2px;       
+            text-decoration: none;
+        }
+
+
+        
+
         &.open {
             left: 0px; // slide in
         }
 
+        .delete-task-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 4px;
+            // opacity: 0;
+            // pointer-events: none;
+            color: #ff4d4d;
+            background: none;
+            border: none;
+            font-size: 16px;
+
+            /* fade in fast, fade out slow */
+            transition:
+                opacity 0.2s ease-in,
+                opacity 0.4s ease-out;
+            
+            &:hover
+            {
+                color: darken(#ff4d4d, 10%);
+            }
+        }
+        .delete-task-btn svg{
+            display: block;
+        }
 
         h1{
             color: $title-color-left;
@@ -86,6 +249,9 @@ body{
         border-collapse: separate;
         border-spacing: 0;
         margin-top: 20px;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
         // border-radius: 10px;
         // overflow: hidden;
         th, td{
@@ -136,9 +302,9 @@ body{
     } 
     
     &.left-open {
-        .toggle-btn {
-            transform: translateY(500%) rotate(180deg);
-            left: 360px; // move button right when panel is open
+        .toggle-btn-container {
+            transform: translateY(200%) rotate(180deg);
+            left: 330px; // move button right when panel is open
             transition: left 0.3s ease, transform 0.3s ease;
         }
         .right-panel {
