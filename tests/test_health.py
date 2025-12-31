@@ -41,4 +41,4 @@ def test_create_and_delete_task():
             'id': task.id}, follow_redirects=True)
         
         assert response.status_code == 200
-        assert MyTask.query.first() == 0
+        assert MyTask.query.count() == 0
