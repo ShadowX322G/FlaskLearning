@@ -5,11 +5,15 @@
 {% endblock %}
 
 {% block content %}
-<div class="content">
+<div class="edit-container">
     <h1>Edit your task</h1>
-    <form action="/edit/{{task.id}}" method="POST">
-        <input type="text" name="content" id="content" value="{{task.content}}"/>
-        <input type="submit" value ="Edit" id ="btn_edit"/>
-    </form>
+    <div class="input-fields">
+        <input form="edit-task" type="text" name="content" value="{{ task.content }}" required/>
+    </div>
+    <div class="button-container">
+        <form id="edit-task" action="/edit/{{task.id}}" method="POST">
+            <input type="submit" value ="Edit" id ="btn_edit"/>
+        </form>
+    </div>
 </div>
 {% endblock %}

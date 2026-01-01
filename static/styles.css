@@ -22,7 +22,7 @@ body h2 {
   color: gold;
 }
 
-.register-container, .login-container {
+.register-container, .login-container, .edit-container {
   align-items: center;
   justify-content: center;
   max-width: 400px;
@@ -35,7 +35,7 @@ body h2 {
   text-align: center;
 }
 
-.register-container p, .login-container p {
+.register-container p, .login-container p, .edit-container p {
   color: #ff0000;
 }
 
@@ -95,7 +95,7 @@ body h2 {
   background-color: #45a049;
 }
 
-.register-container h1, .login-container h1 {
+.register-container h1, .login-container h1, .edit-container h1 {
   font-size: 56px;
   font-weight: 700;
   text-align: center;
@@ -104,6 +104,11 @@ body h2 {
   letter-spacing: 1px;
   line-height: 1.2;
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.edit-container h1 {
+  font-size: 56px;
+  min-width: 400px;
 }
 
 .dashboard-container {

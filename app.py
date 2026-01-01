@@ -5,12 +5,14 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func, extract
 from datetime import datetime
 from flask_login import UserMixin, LoginManager, login_user, login_required, current_user, logout_user
+import tzlocal
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
+Local_TZ = tzlocal.get_localzone()
 
 Scss(app)
 
@@ -37,7 +39,7 @@ class MyTask(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(100), nullable=False)
     complete = db.Column(db.Integer, default=0)
-    updated = db.Column(db.DateTime, default=datetime.utcnow)
+    updated = db.Column(db.DateTime, default=datetime.now(Local_TZ))
     user_id = db.Column(db.Integer, nullable=False)
 
     def __repr__(self):
@@ -49,7 +51,7 @@ class Spending(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     category = db.Column(db.String(50), nullable=False)
     amount = db.Column(db.Float, nullable=False)
-    date = db.Column(db.DateTime, default=datetime.now)
+    date = db.Column(db.DateTime, default=datetime.now(Local_TZ))
     user_id = db.Column(db.Integer, nullable = False)
     
 
@@ -116,8 +118,8 @@ def index():
     if not current_user.is_authenticated:
         # first time or not logged in → redirect to register
         return redirect('/register')
-    selected_month = int(request.args.get('filter_month', datetime.now().month))
-    selected_year = int(request.args.get('filter_year', datetime.now().year))
+    selected_month = int(request.args.get('filter_month', datetime.now(Local_TZ).month))
+    selected_year = int(request.args.get('filter_year', datetime.now(Local_TZ).year))
 
     if request.method == 'POST':
         form_type = request.form.get('form_type')
@@ -182,8 +184,8 @@ def index():
 @app.route('/delete/<string:type>/', methods=['POST'])
 @login_required
 def delete(type):
-    filter_month = request.form.get('filter_month', datetime.now().month)
-    filter_year = request.form.get('filter_year', datetime.now().year)
+    filter_month = request.form.get('filter_month', datetime.now(Local_TZ).month)
+    filter_year = request.form.get('filter_year', datetime.now(Local_TZ).year)
     if type == 'task':
         id = request.form.get('id')
         item = MyTask.query.get_or_404(id)
@@ -204,11 +206,12 @@ def delete(type):
     return redirect(f"/?filter_month={filter_month}&filter_year={filter_year}")
 
 @app.route('/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
 def edit(id):
     task = MyTask.query.get_or_404(id)
     if request.method == 'POST':
         task.content = request.form['content']
-        task.updated = datetime.utcnow()
+        task.updated = datetime.now(Local_TZ)
         db.session.commit()
         return redirect('/')
     return render_template('edit.html', task=task)

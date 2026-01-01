@@ -30,7 +30,7 @@ body{
         color: gold;
     }
 }
-.register-container, .login-container {
+.register-container, .login-container, .edit-container {
     align-items: center;
     justify-content: center;
     max-width: 400px;
@@ -101,7 +101,7 @@ body{
 .button-container input[type="submit"]:hover {
     background-color: #45a049;
 }
-.register-container h1 , .login-container h1 {
+.register-container h1 , .login-container h1 , .edit-container h1 {
     font-size: 56px;                // keep it big for impact
     font-weight: 700;               // bold for emphasis
     text-align: center;             // center the header
@@ -111,6 +111,10 @@ body{
     line-height: 1.2;               // tight but readable
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1); // subtle shadow for depth
 }
+.edit-container h1{
+    font-size: 56px;
+    min-width: 400px;
+    }
 
 
 .dashboard-container{

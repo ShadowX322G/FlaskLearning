@@ -27,7 +27,7 @@
             {% for task in tasks %}
             <tr>
                 <td  onclick='window.location="/edit/{{task.id}}"'>{{ task.content }}</td>
-                <td  onclick='window.location="/edit/{{task.id}}"'>{{ task.updated.strftime("%H-%M-%S") }}</td>
+                <td  onclick='window.location="/edit/{{task.id}}"'>{{ task.updated.strftime("%y-%m-%d") }}</td>
                 <td>
                     <span class="task-controls">
                     <form method="POST" action="{{ url_for('delete', type='task') }}" style="display:inline;">
