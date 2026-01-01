@@ -32,6 +32,8 @@
                     <span class="task-controls">
                     <form method="POST" action="{{ url_for('delete', type='task') }}" style="display:inline;">
                         <input type="hidden" name="id" value="{{ task.id }}">
+                        <input type="hidden" name="filter_month" value="{{ selected_month }}">
+                        <input type="hidden" name="filter_year" value="{{ selected_year }}">
                         <button type="submit" onclick="return confirm('Delete this task?');" class="delete-task-btn" aria-label="Delete">
                             <svg width="36" height="36" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -67,14 +69,42 @@
 
         <!-- SPENDING CHART -->
         <h1>Spending or smn</h1>
+        <div class='spending-forms-filter'>
+            <form method="GET" action="/">
+                <h2>Filter Spendings</h2>
+                <label for="filter_month">Month:</label>
+                <select name="filter_month" id="filter_month">
+                    {% for m in range(1,13) %}
+                    <option value="{{ m }}" {% if m == selected_month %}selected{% endif %}>{{ m }}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="filter_year">Year:</label>
+                <select name="filter_year" id="filter_year">
+                    {% for y in range(2023, 2031) %}
+                    <option value="{{ y }}" {% if y == selected_year %}selected{% endif %}>{{ y }}</option>
+                    {% endfor %}
+                </select>
+
+                <button type="submit">Filter</button>
+            </form>
+        </div>
+
+
+
         <div class="spending-controls">
+            <h1>Spendings for {{ selected_month }}/{{ selected_year }}</h1>
+
             {% for category, amount in data %}
                 <div class="spending-item">
                     <span class="spending-label">
                         <strong>{{ category }}</strong>: ${{ "%.2f"|format(amount) }}
                     </span>
 
+
                     <form method="POST" action="{{ url_for('delete', type='spending') }}">
+                        <input type="hidden" name="filter_month" value="{{ selected_month }}">
+                        <input type="hidden" name="filter_year" value="{{ selected_year }}">
                         <input type="hidden" name="category" value="{{ category }}">
                         <button class="delete-spending-btn" type="submit" onclick="return confirm('Delete all spendings for {{ category }}?');"
                         aria-label="Delete">
@@ -91,58 +121,43 @@
                 </div>
             {% endfor %}
         </div>
-
-        <form method="POST" action="{{ url_for('add_spending') }}">
-            <input type="text" name="category" placeholder="Category" required>
-            <input type="number" step="0.01" name="amount" placeholder="Amount" required>
-
-            <label for="month">Month:</label>
-            <select name="month" id="month">
-                {% for m in range(1,13) %}
-                <option value="{{ m }}" {% if m == current_month %}selected{% endif %}>{{ m }}</option>
-                {% endfor %}
-            </select>
-
-            <label for="year">Year:</label>
-            <select name="year" id="year">
-                {% for y in range(2023, 2031) %}
-                <option value="{{ y }}" {% if y == current_year %}selected{% endif %}>{{ y }}</option>
-                {% endfor %}
-            </select>
-
-            <button type="submit">Add Spending</button>
-        </form>
-        <form method="GET" action="/">
-            <label for="filter_month">Month:</label>
-            <select name="filter_month" id="filter_month">
-                {% for m in range(1,13) %}
-                <option value="{{ m }}" {% if m == selected_month %}selected{% endif %}>{{ m }}</option>
-                {% endfor %}
-            </select>
-
-            <label for="filter_year">Year:</label>
-            <select name="filter_year" id="filter_year">
-                {% for y in range(2023, 2031) %}
-                <option value="{{ y }}" {% if y == selected_year %}selected{% endif %}>{{ y }}</option>
-                {% endfor %}
-            </select>
-
-            <button type="submit">Filter</button>
-        </form>
-
+        <span class="spending-forms-add-hover">
+            <span class="display-indicator">+</span>
+            <div class="spending-forms-add">
+                <form method="POST" action="{{ url_for('add_spending') }}">
+                    <input type="text" name="category" placeholder="Category" required>
+                    <input type="number" step="0.01" name="amount" placeholder="Amount" required>
+                    <label for="month">Month:</label>
+                    <select name="month" id="month">
+                        {% for m in range(1,13) %}
+                        <option value="{{ m }}" {% if m == selected_month %}selected{% endif %}>{{ m }}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="year">Year:</label>
+                    <select name="year" id="year">
+                        {% for y in range(2023, 2031) %}
+                        <option value="{{ y }}" {% if y == selected_year %}selected{% endif %}>{{ y }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit">Add Spending</button>
+                </form>
+            </div>
+        </span>
         <canvas id="spendingChart" width="400" height="200"></canvas>
 <!-- 
-        <div class="delete-buttons">
-            {% for category in categories %}
-            <form method="POST" action="{{ url_for('delete', type='spending') }}">
-                <input type="hidden" name="category" value="{{ category }}">
-                <button type="submit" onclick="return confirm('Delete all spendings for {{ category }}?');">
-                    Delete {{ category }}
-                </button>
-            </form>
-            {% endfor %}
+        # <div class="delete-buttons">
+        #     {% for category in categories %}
+        #     <form method="POST" action="{{ url_for('delete', type='spending') }}">
+        #         <input type="hidden" name="filter_month" value="{{ selected_month }}">
+        #         <input type="hidden" name="filter_year" value="{{ selected_year }}">
+        #         <input type="hidden" name="category" value="{{ category }}">
+        #         <button type="submit" onclick="return confirm('Delete all spendings for {{ category }}?');">
+        #             Delete {{ category }}
+        #         </button>
+        #     </form>
+        #     {% endfor %}
 
-        </div> -->
+        # </div> -->
 
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

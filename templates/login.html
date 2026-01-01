@@ -3,10 +3,19 @@
 <title>Login Page</title>
 {% endblock %}
 {% block content %}
-<h1>Login</h1>
-<form action="/login" method="POST">
-    <input type="text" name="username" placeholder="username" required/>
-    <input type="password" name="password" placeholder="password" required/>
-    <input type="submit" value="login"/>
-</form>
+<div class="login-container">
+    <h1>Login</h1>
+    <div class="input-fields">
+        <input type="text" name="username" form="login-form" placeholder="username" required/>
+        <input type="password" name="password" form="login-form" placeholder="password" required/>
+    </div>
+    <div class="button-container">
+        <form id="login-form" action="/login" method="POST">
+            <input type="submit" value="login"/>
+        </form>
+    </div>
+</div>
+{% if error %}
+<p style="color: rgb(255, 255, 255);">{{ error }}</p>
+{% endif %}
 {% endblock %}

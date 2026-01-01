@@ -49,7 +49,7 @@ class Spending(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     category = db.Column(db.String(50), nullable=False)
     amount = db.Column(db.Float, nullable=False)
-    date = db.Column(db.DateTime, default=datetime.utcnow)
+    date = db.Column(db.DateTime, default=datetime.now)
     user_id = db.Column(db.Integer, nullable = False)
     
 
@@ -77,6 +77,9 @@ def load_user(user_id):
 @app.route('/register', methods = ['GET', 'POST'])
 def register():
     if request.method == 'POST':
+        form_type = request.form.get('form_type')
+        if form_type == 'login':
+            return redirect('/login')
         username = request.form['username']
         password = request.form['password']
 
@@ -93,20 +96,28 @@ def register():
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
     if request.method == 'POST':
+        
         username = request.form['username']
         password = request.form['password']
     
         user = User.query.filter_by(username = username).first()
+        if user is None:
+            return render_template('register.html', error="User does not exist. Please register.")
+        if user is not None:
+            if user.password != password:
+                return render_template('login.html', error="Invalid password")
         if user and user.password == password:
             login_user(user)
             return redirect('/')
     return render_template('login.html')
 
 @app.route('/', methods=['GET', 'POST'])
-@login_required
 def index():
-    selected_month = int(request.args.get('filter_month', datetime.utcnow().month))
-    selected_year = int(request.args.get('filter_year', datetime.utcnow().year))
+    if not current_user.is_authenticated:
+        # first time or not logged in → redirect to register
+        return redirect('/register')
+    selected_month = int(request.args.get('filter_month', datetime.now().month))
+    selected_year = int(request.args.get('filter_year', datetime.now().year))
 
     if request.method == 'POST':
         form_type = request.form.get('form_type')
@@ -122,16 +133,17 @@ def index():
         elif form_type == 'spending':
             category = request.form['category'].strip()
             amount = float(request.form['amount'])
-            month = int(request.form['month'])
-            year = int(request.form['year'])
-            date = datetime(year, month, 1)
+            selected_month = int(request.form.get['month'])
+            selected_year = int(request.form['year'])
+            date = datetime(selected_year, selected_month, 1)
 
             if category and amount:
                 db.session.add(Spending(category=category, amount=amount, date=date, user_id=current_user.id))
                 db.session.commit()
 
             # redirect to the same month/year after adding
-            return redirect(f"/?filter_month={month}&filter_year={year}")
+            return redirect(f"/?filter_month={selected_month}&filter_year={selected_year}")
+            # return(selected_month, selected_year)
 
 
     # ----- TASKS GET -----
@@ -170,6 +182,8 @@ def index():
 @app.route('/delete/<string:type>/', methods=['POST'])
 @login_required
 def delete(type):
+    filter_month = request.form.get('filter_month', datetime.now().month)
+    filter_year = request.form.get('filter_year', datetime.now().year)
     if type == 'task':
         id = request.form.get('id')
         item = MyTask.query.get_or_404(id)
@@ -186,7 +200,8 @@ def delete(type):
         return "Invalid type", 400
 
     db.session.commit()
-    return redirect('/')
+    
+    return redirect(f"/?filter_month={filter_month}&filter_year={filter_year}")
 
 @app.route('/edit/<int:id>', methods=['GET', 'POST'])
 def edit(id):
@@ -213,7 +228,7 @@ def add_spending():
     date = datetime(year, month, 1)  # store as first day of month
     db.session.add(Spending(category=category, amount=amount, date=date, user_id=current_user.id))
     db.session.commit()
-    return redirect('/')
+    return redirect(f"/?filter_month={month}&filter_year={year}")
 
 @app.route('/logout')
 @login_required
