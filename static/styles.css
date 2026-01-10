@@ -1,5 +1,5 @@
 body {
-  background-color: #e1ae84;
+  background-color: #0e0e0e;
 }
 
 body h2 {
@@ -9,9 +9,9 @@ body h2 {
 }
 
 body h1 {
-  color: #FDF8F4;
+  color: #e8f5ee;
   display: inline-block;
-  background-color: #D9A474;
+  background-color: #0f2a1d;
   border-radius: 20px;
   padding: 8px 116px;
   margin: 5px;
@@ -19,7 +19,7 @@ body h1 {
 }
 
 body h2 {
-  color: gold;
+  color: #1db954;
 }
 
 .register-container, .login-container, .edit-container {
@@ -36,7 +36,7 @@ body h2 {
 }
 
 .register-container p, .login-container p, .edit-container p {
-  color: #ff0000;
+  color: #ff4d4d;
 }
 
 .button-container {
@@ -52,7 +52,7 @@ body h2 {
   padding: 8px 20px;
   border: none;
   border-radius: 6px;
-  background-color: #4caf50;
+  background-color: #1db954;
   color: #fff;
   cursor: pointer;
   font-size: 16px;
@@ -65,34 +65,36 @@ body h2 {
   gap: 12px;
   min-width: 250px;
   width: 100%;
-  background: #ffffff;
+  background: #0e0e0e;
   padding: 12px 20px;
   border-radius: 16px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
   transition: box-shadow 0.3s ease, transform 0.2s ease;
 }
 
 .input-fields:focus-within {
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 20px rgba(29, 185, 84, 0.35);
   transform: translateY(-1px);
 }
 
 .input-fields input {
   width: 100%;
   padding: 10px 12px;
-  border: 1px solid #ddd;
+  border: 1px solid #2a2a2a;
   border-radius: 10px;
   font-size: 16px;
   outline: none;
+  background-color: #121212;
+  color: #ffffff;
   transition: border-color 0.3s ease;
 }
 
 .input-fields input:focus {
-  border-color: #4caf50;
+  border-color: #1db954;
 }
 
 .button-container input[type="submit"]:hover {
-  background-color: #45a049;
+  background-color: #0f612c;
 }
 
 .register-container h1, .login-container h1, .edit-container h1 {
@@ -100,10 +102,10 @@ body h2 {
   font-weight: 700;
   text-align: center;
   margin-bottom: 60px;
-  color: #333333;
+  color: #e0e0e0;
   letter-spacing: 1px;
   line-height: 1.2;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
 }
 
 .edit-container h1 {
@@ -120,13 +122,12 @@ body h2 {
   display: flex;
   align-items: center;
   gap: 20px;
-  /* BIG invisible hover buffer */
   padding: 6px;
 }
 
 .dashboard-container .spending-label {
   font-size: 16px;
-  color: #ffffff;
+  color: #e6e6e6;
 }
 
 .dashboard-container .delete-spending-btn {
@@ -140,7 +141,6 @@ body h2 {
   background: none;
   border: none;
   font-size: 16px;
-  /* fade in fast, fade out slow */
   transition: opacity 0.2s ease-in, opacity 0.4s ease-out;
 }
 
@@ -162,7 +162,7 @@ body h2 {
   transform: translateY(0);
   top: 10px;
   right: 10px;
-  background: #bc4538;
+  background: #7a1f1f;
   border: none;
   padding: 10px 20px;
   border-radius: 10px;
@@ -177,8 +177,8 @@ body h2 {
 }
 
 .dashboard-container .logout-btn:hover {
-  background-color: #95372c;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  background-color: #511515;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   transform: translateY(3px);
 }
 
@@ -197,7 +197,7 @@ body h2 {
 }
 
 .dashboard-container .toggle-btn-container:hover .toggle-btn {
-  background-color: #b77741;
+  background-color: #168d40;
   transform: scale(1.5);
   transition: transform 0.3s ease, background-color 0.3s ease;
 }
@@ -207,13 +207,13 @@ body h2 {
   padding: 10px;
   font-size: 20px;
   border: none;
-  background: #C89163;
+  background: #1db954;
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .dashboard-container .toggle-btn:hover {
   cursor: pointer;
-  background-color: #b77741;
+  background-color: #168d40;
 }
 
 .dashboard-container .left-panel {
@@ -226,11 +226,10 @@ body h2 {
   width: 350px;
   height: 100vh;
   padding: 20px;
-  background-color: #fff;
+  background-color: #0e0e0e;
   border-radius: 0 10px 10px 0;
   transition: left 0.3s ease;
   z-index: 1000;
-  /* Typography improvements */
 }
 
 .dashboard-container .left-panel .add-task-form {
@@ -239,7 +238,7 @@ body h2 {
   max-width: 280px;
   padding: 15px;
   border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -248,7 +247,7 @@ body h2 {
 }
 
 .dashboard-container .left-panel .add-task-form:focus-within {
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 6px 18px rgba(29, 185, 84, 0.35);
 }
 
 .dashboard-container .left-panel .add-task-form input, .dashboard-container .left-panel .add-task-form textarea, .dashboard-container .left-panel .add-task-form select {
@@ -258,20 +257,22 @@ body h2 {
 .dashboard-container .left-panel .add-task-form input[type="text"] {
   max-width: 250px;
   padding: 10px 12px;
-  border: 1px solid #ddd;
+  border: 1px solid #2a2a2a;
   border-radius: 10px;
   font-size: 16px;
   outline: none;
+  background-color: #121212;
+  color: #ffffff;
   transition: border-color 0.3s ease;
 }
 
 .dashboard-container .left-panel .add-task-form input[type="text"]:focus {
-  border-color: #4caf50;
+  border-color: #1db954;
 }
 
 .dashboard-container .left-panel .add-task-form .add-task-btn {
   width: 100%;
-  background: linear-gradient(135deg, #007bff, #3395ff);
+  background: linear-gradient(135deg, #1db954, #2bde6a);
   border: none;
   padding: 12px 16px;
   border-radius: 8px;
@@ -280,18 +281,18 @@ body h2 {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .dashboard-container .left-panel .add-task-form .add-task-btn:hover {
-  background: linear-gradient(135deg, #3395ff, #66b0ff);
+  background: linear-gradient(135deg, #2bde6a, #57e589);
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
 }
 
 .dashboard-container .left-panel .add-task-form .add-task-btn:active {
   transform: translateY(0);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
 }
 
 .dashboard-container .left-panel .task-controls {
@@ -302,21 +303,6 @@ body h2 {
   justify-content: center;
   vertical-align: middle;
   margin: 10px auto;
-}
-
-.dashboard-container .left-panel .task-controls button.delete-task-btn,
-.dashboard-container .left-panel .task-controls a#edit {
-  margin: 0;
-}
-
-.dashboard-container .left-panel .task-controls button.delete-task-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.dashboard-container .left-panel .task-controls a#edit {
-  text-decoration: none;
 }
 
 .dashboard-container .left-panel.open {
@@ -341,18 +327,12 @@ body h2 {
 .dashboard-container .left-panel .delete-task-btn:hover {
   color: #ff1a1a;
   transform: translateY(-1px);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 .dashboard-container .left-panel .delete-task-btn:active {
   transform: translateY(0);
   box-shadow: none;
-}
-
-.dashboard-container .left-panel .delete-task-btn svg {
-  display: block;
-  width: 18px;
-  height: 18px;
 }
 
 .dashboard-container .left-panel h1 {
@@ -364,7 +344,7 @@ body h2 {
   letter-spacing: 1px;
   line-height: 1.2;
   margin-bottom: 40px;
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.5);
   border: 10px solid #000000;
 }
 
@@ -383,7 +363,7 @@ body h2 {
   font-family: Arial, sans-serif;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   /* Rounded corners on table */
 }
 
@@ -403,15 +383,16 @@ body h2 {
 }
 
 .dashboard-container .left-panel table th {
-  background-color: #C89163;
-  color: #000;
+  background-color: #1a1a1a;
+  color: #00ce0a;
   font-weight: 600;
-  border-bottom: 1px solid #000000;
+  border-bottom: 1px solid #333;
 }
 
 .dashboard-container .left-panel table td {
-  background-color: #ffc99d;
-  border-bottom: 1px solid #e0e0e0;
+  background-color: #121212;
+  border-bottom: 1px solid #333;
+  color: #fff;
 }
 
 .dashboard-container .left-panel table tr {
@@ -426,13 +407,13 @@ body h2 {
 }
 
 .dashboard-container .left-panel table tr:hover td {
-  background-color: #ffe5cc;
+  background-color: #1e1e1e;
   transition: background-color 0.3s ease;
 }
 
 .dashboard-container .left-panel table tr.table-title th {
-  background-color: #b07a53;
-  color: #fff;
+  background-color: #222;
+  color: #00ce0a;
   font-size: 18px;
   font-weight: 700;
 }
@@ -458,7 +439,7 @@ body h2 {
   top: 0;
   z-index: 500;
   flex: 1;
-  background: #000000;
+  background: #0e0e0e;
   margin: 50px 0;
   padding: 35px;
   border-radius: 10px;
@@ -472,7 +453,7 @@ body h2 {
   font-family: "Arial", Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   margin: 0;
   padding: 0;
-  color: #000000;
+  color: #00ce0a;
 }
 
 .dashboard-container .right-panel .spending-forms-filter {
@@ -492,6 +473,7 @@ body h2 {
   justify-content: flex-end;
   z-index: 1000;
   padding: 100% 250px;
+  transition: right 0.3s ease;
 }
 
 .dashboard-container .right-panel .spending-forms-add-hover .display-indicator {
@@ -531,18 +513,18 @@ body h2 {
   justify-content: flex-end;
   align-items: center;
   gap: 1rem;
-  background: #f5f5f5;
+  background: #1e1e1e;
   padding: 1rem;
   border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   z-index: 1000;
 }
 
 .dashboard-container .right-panel .spending-forms-filter form, .dashboard-container .right-panel .spending-forms-add form {
-  background: #f5f5f5;
+  background: #1e1e1e;
   padding: 1.5rem;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -552,8 +534,8 @@ body h2 {
 
 .dashboard-container .right-panel .spending-forms-filter form button, .dashboard-container .right-panel .spending-forms-add form button {
   padding: 0.6rem 1rem;
-  background: #4caf50;
-  color: #fff;
+  background: #00ce0a;
+  color: #000;
   border: none;
   border-radius: 8px;
   font-weight: 600;
@@ -562,17 +544,17 @@ body h2 {
 }
 
 .dashboard-container .right-panel .spending-forms-filter form button:hover, .dashboard-container .right-panel .spending-forms-add form button:hover {
-  background: #45a049;
+  background: #02ff0e;
 }
 
 .dashboard-container .right-panel .spending-forms-filter form button:active, .dashboard-container .right-panel .spending-forms-add form button:active {
-  background: #3e8e41;
+  background: #009b08;
 }
 
 .dashboard-container .right-panel .spending-forms-filter form label, .dashboard-container .right-panel .spending-forms-add form label {
   font-weight: 600;
   margin-bottom: 0.25rem;
-  color: #333;
+  color: #00ce0a;
 }
 
 .dashboard-container .right-panel .spending-forms-filter form input[type="text"],
@@ -582,10 +564,12 @@ body h2 {
 .dashboard-container .right-panel .spending-forms-add form select {
   padding: 0.5rem 0.75rem;
   border-radius: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid #333;
   font-size: 1rem;
   outline: none;
   transition: all 0.2s ease;
+  color: #fff;
+  background-color: #121212;
 }
 
 .dashboard-container .right-panel .spending-forms-filter form input[type="text"]:focus,
@@ -593,8 +577,8 @@ body h2 {
 .dashboard-container .right-panel .spending-forms-filter form select:focus, .dashboard-container .right-panel .spending-forms-add form input[type="text"]:focus,
 .dashboard-container .right-panel .spending-forms-add form input[type="number"]:focus,
 .dashboard-container .right-panel .spending-forms-add form select:focus {
-  border-color: #4caf50;
-  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+  border-color: #00ce0a;
+  box-shadow: 0 0 0 3px rgba(0, 206, 10, 0.2);
 }
 
 @media (max-width: 600px) {
@@ -608,7 +592,7 @@ body h2 {
 }
 
 .dashboard-container .right-panel h4, .dashboard-container .right-panel td, .dashboard-container .right-panel th, .dashboard-container .right-panel p, .dashboard-container .right-panel li {
-  color: #ffffff;
+  color: #00ce0a;
 }
 
 .dashboard-container.left-open .toggle-btn-container {
@@ -628,33 +612,33 @@ body h2 {
 }
 
 .dashboard-container form input[type="text"] {
-  background-color: #FFFFFF;
+  background-color: #121212;
   width: 70%;
   padding: 10px;
   margin-right: 10px;
-  border: 1px solid #C89163;
+  border: 1px solid #00ce0a;
   border-radius: 5px;
-  color: #2A2A2A;
+  color: #00ce0a;
 }
 
 .dashboard-container form #btn_add, .dashboard-container form #btn_edit {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
-  color: #fff;
+  color: #000;
   cursor: pointer;
 }
 
 .dashboard-container form #btn_add {
-  background-color: #3F8F55;
+  background-color: #00ce0a;
 }
 
 .dashboard-container form #btn_add:hover {
-  background-color: #4fb26a;
+  background-color: #02ff0e;
 }
 
 .dashboard-container form #btn_edit {
-  background-color: #007bff;
+  background-color: #007f3f;
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -664,7 +648,7 @@ body h2 {
 }
 
 .dashboard-container form #btn_edit:hover {
-  background-color: #004a99;
+  background-color: #00b258;
   transform: translateY(-1px);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
@@ -675,13 +659,13 @@ body h2 {
 }
 
 .dashboard-container form #btn_edit:focus-visible {
-  outline: 2px solid #66b0ff;
+  outline: 2px solid #00e572;
   outline-offset: 2px;
 }
 
 .dashboard-container a {
   display: inline-block;
-  background-color: #007bff;
+  background-color: #1db954;
   border-radius: 20px;
   color: #ffffff;
   text-decoration: none;
@@ -691,7 +675,7 @@ body h2 {
 
 .dashboard-container a:hover {
   text-decoration: underline;
-  background-color: #0062cc;
+  background-color: #168d40;
 }
 
 .dashboard-container a#delete {
@@ -708,7 +692,7 @@ body h2 {
 .dashboard-container a#edit {
   font-size: 14px;
   font-weight: 600;
-  background-color: #007bff;
+  background-color: #1db954;
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -718,7 +702,7 @@ body h2 {
 }
 
 .dashboard-container a#edit:hover {
-  background-color: #004a99;
+  background-color: #0f612c;
   transform: translateY(-1px);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
@@ -729,6 +713,6 @@ body h2 {
 }
 
 .dashboard-container a#edit:focus-visible {
-  outline: 2px solid #66b0ff;
+  outline: 2px solid #57e589;
   outline-offset: 2px;
 }

@@ -1,12 +1,12 @@
 // Color Variables
 
-$primary-color: #007bff;
+$primary-color: #1db954;              // green (main accent)
 $primary-hover-color: darken($primary-color,20%);
-$success-color: #28a745;
+$success-color: #1db954;              // unify success with primary green
 $success-hover-color: darken($success-color,20%);
-$title-color: #ffffff;
-$title-color-left: #000000;
-$bg-color: #e1ae84;
+$title-color: #ffffff;                // unchanged
+$title-color-left: #000000;           // unchanged
+$bg-color: #0e0e0e;                    // near-black background
 
 
 body{
@@ -18,16 +18,16 @@ body{
     }
 
     h1{
-        color: #FDF8F4;
+        color: #e8f5ee;                 // was #FDF8F4
         display: inline-block;
-        background-color: #D9A474;
+        background-color: #0f2a1d;      // was #D9A474
         border-radius: 20px;
         padding: 8px 116px;
         margin: 5px;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,sans-serif;
     }
     h2{
-        color: gold;
+        color: #1db954;                 // was gold
     }
 }
 .register-container, .login-container, .edit-container {
@@ -42,7 +42,7 @@ body{
     flex-direction: column;
     text-align: center;
     p{
-        color: #ff0000;
+        color: #ff4d4d;                 // slightly softened red
     }
 }
 
@@ -59,7 +59,7 @@ body{
     padding: 8px 20px;
     border: none;
     border-radius: 6px;
-    background-color: #4caf50;
+    background-color: $primary-color;  // was #4caf50
     color: #fff;
     cursor: pointer;
     font-size: 16px;
@@ -68,48 +68,50 @@ body{
 .input-fields {
     align-items: center;
     display: flex;
-    flex-direction: column;        // stack inputs vertically for clarity
-    gap: 12px;                     // more consistent spacing
-    min-width: 250px;              // slightly wider for usability
-    width: 100%;                   // responsive width
-    background: #ffffff;           // clean white background
-    padding: 12px 20px;            // more comfortable padding
-    border-radius: 16px;           // smoother rounded corners
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08); // subtle depth
+    flex-direction: column;
+    gap: 12px;
+    min-width: 250px;
+    width: 100%;
+    background: #0e0e0e;                // was #ffffff
+    padding: 12px 20px;
+    border-radius: 16px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
     transition: box-shadow 0.3s ease, transform 0.2s ease;
 
     &:focus-within {
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); // glow effect on focus
+        box-shadow: 0 8px 20px rgba(29, 185, 84, 0.35);
         transform: translateY(-1px);
     }
 
     input {
         width: 100%;
         padding: 10px 12px;
-        border: 1px solid #ddd;       // soft border
+        border: 1px solid #2a2a2a;
         border-radius: 10px;
         font-size: 16px;
         outline: none;
+        background-color: #121212;
+        color: #ffffff;
         transition: border-color 0.3s ease;
 
         &:focus {
-        border-color: #4caf50;      // green border on focus
+        border-color: $primary-color;
         }
     }
 }
 
 .button-container input[type="submit"]:hover {
-    background-color: #45a049;
+    background-color: $primary-hover-color;
 }
 .register-container h1 , .login-container h1 , .edit-container h1 {
-    font-size: 56px;                // keep it big for impact
-    font-weight: 700;               // bold for emphasis
-    text-align: center;             // center the header
-    margin-bottom: 60px;            // slightly less than before for balance
-    color: #333333;                 // soft dark text instead of pure black
-    letter-spacing: 1px;            // subtle spacing for elegance
-    line-height: 1.2;               // tight but readable
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1); // subtle shadow for depth
+    font-size: 56px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 60px;
+    color: #e0e0e0;                     // was #333333
+    letter-spacing: 1px;
+    line-height: 1.2;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
 }
 .edit-container h1{
     font-size: 56px;
@@ -120,28 +122,17 @@ body{
 .dashboard-container{
     display: flex;
     gap: 20px;
-    // align-items: flex-start;
-    // max-width: 4000px;
-    // margin: 50px auto;
-    // padding: 20px;
-    // background-color: #1E1E1E;
-    // border-radius: 10px;
-    // box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    // text-align: center;
 
     .spending-item {
         display: flex;
         align-items: center;
         gap: 20px;
-
-        /* BIG invisible hover buffer */
         padding: 6px;
     }
 
-
     .spending-label {
         font-size: 16px;
-        color: #ffffff;
+        color: #e6e6e6;                 // was #ffffff
         &:hover{
             
             }
@@ -160,7 +151,6 @@ body{
         border: none;
         font-size: 16px;
 
-        /* fade in fast, fade out slow */
         transition:
             opacity 0.2s ease-in,
             opacity 0.4s ease-out;
@@ -178,15 +168,13 @@ body{
             color: darken(#ff4d4d, 10%);
         }
     }
-    
-
 
     .logout-btn {
         position: fixed;
         transform: translateY(0);
         top: 10px;
         right: 10px;
-        background: #bc4538;
+        background: #7a1f1f;             // darker red
         border: none;
         padding: 10px 20px;
         border-radius: 10px;
@@ -199,11 +187,12 @@ body{
         text-height: 22px;
         box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1);
         &:hover {
-            background-color: darken(#bc4538, 10%);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            background-color: darken(#7a1f1f, 10%);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
             transform: translateY(3px)
         }
     }
+
 
     .toggle-btn-container {
         position: fixed;
@@ -219,7 +208,7 @@ body{
         transition: left 0.3s ease, transform 0.3s ease;
         &:hover {
             .toggle-btn {
-                background-color: darken(#C89163, 10%);
+                background-color: darken($primary-color, 10%); // was darken(#C89163, 10%)
                 transform: scale(1.5);
                 transition: transform 0.3s ease, background-color 0.3s ease;
             }
@@ -230,12 +219,12 @@ body{
         padding: 10px;
         font-size: 20px;
         border: none;
-        background: #C89163;
+        background: $primary-color; // was #C89163
         transition: background-color 0.3s ease, transform 0.3s ease;
         &:hover
         {
             cursor: pointer;
-            background-color: darken(#C89163, 10%);
+            background-color: darken($primary-color, 10%); // was darken(#C89163, 10%)
         }
     }
     .left-panel {
@@ -248,7 +237,7 @@ body{
         width: 350px;
         height: 100vh;
         padding: 20px;
-        background-color: #fff;
+        background-color: #0e0e0e; // was #fff
         border-radius: 0 10px 10px 0;
         transition: left 0.3s ease;
         z-index: 1000;
@@ -256,19 +245,18 @@ body{
         .add-task-form {
             margin-top: 20px;
             width: 100%;
-            max-width: 280px;  // slightly more breathing room
-            padding: 15px;     // reduce inner padding to avoid double-padding feel
+            max-width: 280px;
+            padding: 15px;
             border-radius: 16px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
             display: flex;
             flex-direction: column;
             gap: 12px;
-            // align-items: stretch;
             align-content: center;
             justify-content: center;
 
             &:focus-within {
-                box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+                box-shadow: 0 6px 18px rgba(29, 185, 84, 0.35);
             }
 
             input, textarea, select {
@@ -277,39 +265,41 @@ body{
             input[type="text"]{
                 max-width: 250px;
                 padding: 10px 12px;
-                border: 1px solid #ddd;
+                border: 1px solid #2a2a2a;
                 border-radius: 10px;
                 font-size: 16px;
                 outline: none;
+                background-color: #121212;
+                color: #ffffff;
                 transition: border-color 0.3s ease;
 
                 &:focus {
-                    border-color: #4caf50;      // green border on focus
+                    border-color: $primary-color; // was #4caf50
                 }    
             }
         }
         .add-task-form .add-task-btn {
             width: 100%;
-            background: linear-gradient(135deg, $primary-color, lighten($primary-color, 10%)); // subtle gradient
+            background: linear-gradient(135deg, $primary-color, lighten($primary-color, 10%));
             border: none;
-            padding: 12px 16px;       // slightly larger for comfort
-            border-radius: 8px;       // smoother corners
+            padding: 12px 16px;
+            border-radius: 8px;
             color: #ffffff;
             font-size: 16px;
-            font-weight: 600;          // slightly bolder text
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); // subtle depth
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 
             &:hover {
                 background: linear-gradient(135deg, lighten($primary-color, 10%), lighten($primary-color, 20%));
-                transform: translateY(-2px);  // subtle lift effect
-                box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+                transform: translateY(-2px);
+                box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
             }
 
             &:active {
                 transform: translateY(0);
-                box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
             }
         }
 
@@ -322,62 +312,37 @@ body{
             vertical-align: middle;
             margin: 10px auto;
         }
-        .task-controls button.delete-task-btn,
-        .task-controls a#edit {
-            margin: 0;              
-        }
-
-        .task-controls button.delete-task-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .task-controls a#edit {
-            // margin-top: 2px;       
-            text-decoration: none;
-        }
-
-
-        
 
         &.open {
-            left: 0px; // slide in
+            left: 0px;
         }
 
         .delete-task-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 6px 8px;           // slightly bigger for easier click/tap
+            padding: 6px 8px;
             color: #ff4d4d;
             background: none;
             border: none;
             font-size: 56px;
-            font-weight: 600;            // make it slightly bolder
+            font-weight: 600;
             cursor: pointer;
-            border-radius: 6px;          // soft rounded button
+            border-radius: 6px;
             transition: color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 
             &:hover {
                 color: darken(#ff4d4d, 10%);
-                transform: translateY(-1px); // subtle lift on hover
-                box-shadow: 0 2px 6px rgba(0,0,0,0.1); // subtle shadow
+                transform: translateY(-1px);
+                box-shadow: 0 2px 6px rgba(0,0,0,0.4);
             }
 
             &:active {
                 transform: translateY(0);
                 box-shadow: none;
             }
-
-            svg {
-                display: block;
-                width: 18px;
-                height: 18px;
-            }
         }
 
-        /* Typography improvements */
         h1 {
             display: inline-flex;
             text-align: center;
@@ -387,15 +352,16 @@ body{
             letter-spacing: 1px;
             line-height: 1.2;
             margin-bottom: 40px;
-            box-shadow: 0 6px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 6px 10px rgba(0,0,0,0.5);
             border: 10px solid #000000;
         }
 
         h4, td, th, p, li {
             color: $title-color-left;
-            font-weight: 500;             // slightly bolder for readability
+            font-weight: 500;
             line-height: 1.5;
         }
+
 
 
         table {
@@ -407,7 +373,7 @@ body{
             font-family: Arial, sans-serif;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); // darker shadow
 
                 td {
                     vertical-align: middle;
@@ -425,15 +391,16 @@ body{
             }
 
             th {
-                background-color: #C89163;
-                color: #000;
+                background-color: #1a1a1a; // dark header
+                color: #00ce0a;            // green text
                 font-weight: 600;
-                border-bottom: 1px solid #000000;
+                border-bottom: 1px solid #333;
             }
 
             td {
-                background-color: #ffc99d;
-                border-bottom: 1px solid #e0e0e0;
+                background-color: #121212; // dark rows
+                border-bottom: 1px solid #333;
+                color: #fff;
             }
             
             tr{
@@ -448,13 +415,13 @@ body{
             }
 
             tr:hover td {
-                background-color: #ffe5cc; // subtle hover effect
+                background-color: #1e1e1e; // subtle hover effect
                 transition: background-color 0.3s ease;
             }
 
             tr.table-title th {
-                background-color: #b07a53; // slightly darker for title row
-                color: #fff;
+                background-color: #222; // slightly lighter title row
+                color: #00ce0a;
                 font-size: 18px;
                 font-weight: 700;
             }
@@ -481,7 +448,7 @@ body{
         // height: 100vh;
         z-index: 500;
         flex: 1;
-        background: #000000;
+        background: #0e0e0e; // dark background
         margin: 50px 0;
         padding: 35px;
         border-radius: 10px;
@@ -494,7 +461,7 @@ body{
         font-family: "Arial", Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
         margin: 0;
         padding: 0;
-        color: #000000;
+        color: #00ce0a; // green accent
     }
 
     .spending-forms-filter{
@@ -516,7 +483,7 @@ body{
         justify-content: flex-end; 
         z-index: 1000;          // ensure it’s above other content}
         padding: 100% 250px;
-
+        transition: right 0.3s ease;
         .display-indicator{
             position: fixed;
             font-size: 70px;
@@ -554,19 +521,21 @@ body{
         justify-content: flex-end; 
         align-items: center;
         gap: 1rem;              // space between children
-        background: #f5f5f5;    // optional: add a background
+        background: #1e1e1e;    // dark panel
         padding: 1rem;          // optional: some padding
         border-radius: 10px;    // optional: rounded corners
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1); // optional: subtle shadow
+        box-shadow: 0 4px 12px rgba(0,0,0,0.4); // subtle shadow
         z-index: 1000;          // ensure it’s above other content
+        // transition: transform 0.3s ease;
     }
+
 
     .spending-forms-filter, .spending-forms-add{ 
         form {
-        background: #f5f5f5;
+        background: #1e1e1e;          // dark form background
         padding: 1.5rem;
         border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); // darker shadow
         display: flex;
         flex-direction: column;
         gap: 1rem;
@@ -575,8 +544,8 @@ body{
 
         button {
         padding: 0.6rem 1rem;
-        background: #4caf50;
-        color: #fff;
+        background: #00ce0a;          // green buttons
+        color: #000;                  // dark text
         border: none;
         border-radius: 8px;
         font-weight: 600;
@@ -584,18 +553,18 @@ body{
         transition: background 0.2s ease;
 
         &:hover {
-            background: #45a049;
+            background: lighten(#00ce0a, 10%);
         }
 
         &:active {
-            background: #3e8e41;
+            background: darken(#00ce0a, 10%);
         }
         }
 
         label {
         font-weight: 600;
         margin-bottom: 0.25rem;
-        color: #333;
+        color: #00ce0a;              // green labels
         }
 
         input[type="text"],
@@ -603,18 +572,17 @@ body{
         select {
         padding: 0.5rem 0.75rem;
         border-radius: 8px;
-        border: 1px solid #ccc;
+        border: 1px solid #333;
         font-size: 1rem;
         outline: none;
         transition: all 0.2s ease;
-        // min-width: 200px;
+        color: #fff;                 // input text color
+        background-color: #121212;   // dark input background
 
         &:focus {
-            border-color: #4caf50; // highlight color
-            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+            border-color: #00ce0a;   // green highlight
+            box-shadow: 0 0 0 3px rgba(0, 206, 10, 0.2);
         }
-
-
     }
 
     // Make forms stack vertically on small screens
@@ -630,7 +598,7 @@ body{
     }
 
         h4, td, th, p, li{
-        color: $title-color;
+        color: #00ce0a; // green text
         }
     } 
     
@@ -647,61 +615,38 @@ body{
         }
     }   
 
-
-    // table{
-    //     width: 100%;
-    //     border-collapse: collapse;
-    //     margin-top: 20px;
-
-    //     th, td{
-    //         padding: 10px;
-    //         border: 1px solid #3A3A3A;
-    //     }
-
-    //     th{
-    //         background-color: #C89163;
-    //         color: #F5F5F5
-    //     }
-
-    //     tr{
-    //         background-color: #121212;
-    //         &:hover{
-    //             background-color: lighten(#121212, 10%);
-    //         }
-    //     }
-    // }
     form{
         
         padding: 20px 0;
 
         input[type="text"]{
-            background-color: #FFFFFF;
+            background-color: #121212; // dark input
             width: 70%;
             padding: 10px;
             margin-right: 10px;
-            border: 1px solid #C89163;
+            border: 1px solid #00ce0a; // green border
             border-radius: 5px;
-            color: #2A2A2A;
+            color: #00ce0a;            // green text
         }
 
         #btn_add, #btn_edit{
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
-            color: #fff;
+            color: #000;               // dark text
             cursor: pointer;
         }
 
         #btn_add{
-            background-color: #3F8F55;
+            background-color: #00ce0a; // green add button
 
             &:hover{
-                background-color: lighten(#3F8F55, 10%);
+                background-color: lighten(#00ce0a, 10%);
             }
         }
 
         #btn_edit {
-            background-color: $primary-color;
+            background-color: #007f3f; // darker green edit
             color: #fff;
             border: none;
             border-radius: 6px;
@@ -714,7 +659,7 @@ body{
                 box-shadow 0.15s ease;
 
             &:hover {
-                background-color: $primary-hover-color;
+                background-color: lighten(#007f3f, 10%);
                 transform: translateY(-1px);
                 box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
             }
@@ -725,12 +670,13 @@ body{
             }
 
             &:focus-visible {
-                outline: 2px solid lighten($primary-color, 20%);
+                outline: 2px solid lighten(#007f3f, 20%);
                 outline-offset: 2px;
             }
         }
 
     }
+
     a{
         display: inline-block;
         background-color: $primary-color;
