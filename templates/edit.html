@@ -1,19 +1,31 @@
 {% extends 'base.html' %}
+<!-- Inherits base layout -->
 
 {% block head %}
+<!-- Page-specific head content -->
 <title>Task Smash</title>
 {% endblock %}
 
 {% block content %}
+<!-- Edit task page content -->
 <div class="edit-container">
+
+    <!-- Page heading -->
     <h1>Edit your task</h1>
+
+    <!-- Input field container -->
     <div class="input-fields">
+        <!-- Pre-filled task content input linked to edit form -->
         <input form="edit-task" type="text" name="content" value="{{ task.content }}" required/>
     </div>
+
+    <!-- Button container -->
     <div class="button-container">
-        <form id="edit-task" action="/edit/{{task.id}}" method="POST">
-            <input type="submit" value ="Edit" id ="btn_edit"/>
+        <!-- Edit task submission form -->
+        <form id="edit-task" action="/edit/{{ task.id }}" method="POST">
+            <input type="submit" value="Edit" id="btn_edit"/>
         </form>
     </div>
+
 </div>
 {% endblock %}

@@ -1,18 +1,35 @@
 <!DOCTYPE html>
+<!-- Declares the document as HTML5 -->
+
 <html lang="en">
+<!-- Root HTML element, language set to English -->
+
 <head>
+    <!-- Character encoding for proper text rendering -->
     <meta charset="UTF-8">
+
+    <!-- Makes the layout responsive on different screen sizes -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
+
+    <!-- Link to main CSS file from Flask static folder -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+    <!-- Google Font: Dancing Script -->
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-</head>
+    <!-- Placeholder block for page-specific head content -->
     {% block head %}{% endblock %}
 </head>
+
 <body>
+    <!-- Navigation bar (currently empty) -->
     <nav>
     </nav>
+
+    <!-- Horizontal separator below navbar -->
     <hr>
+
+    <!-- Main content block for child templates -->
     {% block content %}{% endblock %}
 </body>
 </html>

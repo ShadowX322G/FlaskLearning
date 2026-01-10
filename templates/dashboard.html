@@ -1,54 +1,84 @@
 {% extends 'base.html' %}
+{# Inherit base layout (navbar, styles, etc.) #}
+
 {% block head %}
 <title>Dashboard</title>
 {% endblock %}
 
 {% block content %}
-<div class = "dashboard-container">
+<div class="dashboard-container">
+    
+    <!-- Toggle button for showing/hiding left task panel -->
     <span class="toggle-btn-container">
-    <button id="toggle-task" class="toggle-btn">➤</button>
+        <button id="toggle-task" class="toggle-btn">➤</button>
     </span>
+
+    <!-- Logout form -->
     <form action="/logout" method="get">
-    <button type="submit" class="logout-btn">Logout</button>
+        <button type="submit" class="logout-btn">Logout</button>
     </form>
+
+    <!-- LEFT PANEL : TASKS -->
     <div class="left-panel">
         <h1>Task Smash</h1>
 
         <!-- TASKS TABLE -->
         {% if tasks|length < 1 %}
+            <!-- Message shown when no tasks exist -->
             <h2>No tasks yet. Add one below!</h2>
         {% else %}
         <table>
-            <tr class = "table-title">
+            <!-- Table header -->
+            <tr class="table-title">
                 <th>Task</th>
                 <th>Updated</th>
                 <th>Actions</th>
             </tr>
+
+            <!-- Loop through user tasks -->
             {% for task in tasks %}
             <tr>
-                <td  onclick='window.location="/edit/{{task.id}}"'>{{ task.content }}</td>
-                <td  onclick='window.location="/edit/{{task.id}}"'>{{ task.updated.strftime("%y-%m-%d") }}</td>
+                <!-- Clicking task opens edit page -->
+                <td onclick='window.location="/edit/{{task.id}}"'>
+                    {{ task.content }}
+                </td>
+
+                <!-- Show last updated date -->
+                <td onclick='window.location="/edit/{{task.id}}"'>
+                    {{ task.updated.strftime("%y-%m-%d") }}
+                </td>
+
+                <!-- Task actions -->
                 <td>
                     <span class="task-controls">
-                    <form method="POST" action="{{ url_for('delete', type='task') }}" style="display:inline;">
-                        <input type="hidden" name="id" value="{{ task.id }}">
-                        <input type="hidden" name="filter_month" value="{{ selected_month }}">
-                        <input type="hidden" name="filter_year" value="{{ selected_year }}">
-                        <button type="submit" onclick="return confirm('Delete this task?');" class="delete-task-btn" aria-label="Delete">
-                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                            <path d="M3 6h18" stroke="currentColor" stroke-width="2"/>
-                            <path d="M8 6V4h8v2" stroke="currentColor" stroke-width="2"/>
-                            <path d="M6 6l1 14h10l1-14" stroke="currentColor" stroke-width="2"/>
-                            <path d="M10 11v6" stroke="currentColor" stroke-width="2"/>
-                            <path d="M14 11v6" stroke="currentColor" stroke-width="2"/>
-                            </svg>
-                        </button>
-                    </form>
 
+                        <!-- Delete task form -->
+                        <form method="POST"
+                              action="{{ url_for('delete', type='task') }}"
+                              style="display:inline;">
+                            <input type="hidden" name="id" value="{{ task.id }}">
+                            <input type="hidden" name="filter_month" value="{{ selected_month }}">
+                            <input type="hidden" name="filter_year" value="{{ selected_year }}">
 
-                    <!-- <br/> -->
-                    <a href="/edit/{{task.id}}" id="edit">Edit</a>
+                            <button type="submit"
+                                    onclick="return confirm('Delete this task?');"
+                                    class="delete-task-btn"
+                                    aria-label="Delete">
+
+                                <!-- Trash icon -->
+                                <svg width="36" height="36" viewBox="0 0 24 24" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3 6h18" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M8 6V4h8v2" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M6 6l1 14h10l1-14" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M10 11v6" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M14 11v6" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </button>
+                        </form>
+
+                        <!-- Edit task link -->
+                        <a href="/edit/{{task.id}}" id="edit">Edit</a>
                     </span>
                 </td>
             </tr>
@@ -56,7 +86,8 @@
         </table>
         {% endif %}
 
-        <form action="/" method="POST", class="add-task-form">
+        <!-- Add task form -->
+        <form action="/" method="POST" class="add-task-form">
             <input type="hidden" name="form_type" value="task">
             <input type="text" name="content" placeholder="Add Task" required/>
             <input type="submit" value="Add Task" class="add-task-btn"/>
@@ -65,24 +96,32 @@
         <hr>
     </div>
 
+    <!-- RIGHT PANEL : SPENDING -->
     <div class="right-panel">
 
-        <!-- SPENDING CHART -->
+        <!-- Spending section header -->
         <h1>Spending or smn</h1>
-        <div class='spending-forms-filter'>
+
+        <!-- Filter spendings by month/year -->
+        <div class="spending-forms-filter">
             <form method="GET" action="/">
                 <h2>Filter Spendings</h2>
+
                 <label for="filter_month">Month:</label>
                 <select name="filter_month" id="filter_month">
                     {% for m in range(1,13) %}
-                    <option value="{{ m }}" {% if m == selected_month %}selected{% endif %}>{{ m }}</option>
+                    <option value="{{ m }}" {% if m == selected_month %}selected{% endif %}>
+                        {{ m }}
+                    </option>
                     {% endfor %}
                 </select>
 
                 <label for="filter_year">Year:</label>
                 <select name="filter_year" id="filter_year">
                     {% for y in range(2023, 2031) %}
-                    <option value="{{ y }}" {% if y == selected_year %}selected{% endif %}>{{ y }}</option>
+                    <option value="{{ y }}" {% if y == selected_year %}selected{% endif %}>
+                        {{ y }}
+                    </option>
                     {% endfor %}
                 </select>
 
@@ -90,77 +129,86 @@
             </form>
         </div>
 
-
-
+        <!-- Spending list for selected month/year -->
         <div class="spending-controls">
             <h1>Spendings for {{ selected_month }}/{{ selected_year }}</h1>
 
+            <!-- Loop through aggregated spending data -->
             {% for category, amount in data %}
                 <div class="spending-item">
+
+                    <!-- Category label and total -->
                     <span class="spending-label">
                         <strong>{{ category }}</strong>: ${{ "%.2f"|format(amount) }}
                     </span>
 
-
-                    <form method="POST" action="{{ url_for('delete', type='spending') }}">
+                    <!-- Delete all spendings in this category -->
+                    <form method="POST"
+                          action="{{ url_for('delete', type='spending') }}">
                         <input type="hidden" name="filter_month" value="{{ selected_month }}">
                         <input type="hidden" name="filter_year" value="{{ selected_year }}">
                         <input type="hidden" name="category" value="{{ category }}">
-                        <button class="delete-spending-btn" type="submit" onclick="return confirm('Delete all spendings for {{ category }}?');"
-                        aria-label="Delete">
+
+                        <button class="delete-spending-btn"
+                                type="submit"
+                                onclick="return confirm('Delete all spendings for {{ category }}?');"
+                                aria-label="Delete">
+
+                            <!-- Trash icon -->
                             <svg width="26" height="26" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                            <path d="M3 6h18" stroke="currentColor" stroke-width="2"/>
-                            <path d="M8 6V4h8v2" stroke="currentColor" stroke-width="2"/>
-                            <path d="M6 6l1 14h10l1-14" stroke="currentColor" stroke-width="2"/>
-                            <path d="M10 11v6" stroke="currentColor" stroke-width="2"/>
-                            <path d="M14 11v6" stroke="currentColor" stroke-width="2"/>
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 6h18" stroke="currentColor" stroke-width="2"/>
+                                <path d="M8 6V4h8v2" stroke="currentColor" stroke-width="2"/>
+                                <path d="M6 6l1 14h10l1-14" stroke="currentColor" stroke-width="2"/>
+                                <path d="M10 11v6" stroke="currentColor" stroke-width="2"/>
+                                <path d="M14 11v6" stroke="currentColor" stroke-width="2"/>
                             </svg>
                         </button>
                     </form>
                 </div>
             {% endfor %}
         </div>
+
+        <!-- Hover + button to add spending -->
         <span class="spending-forms-add-hover">
             <span class="display-indicator">+</span>
+
+            <!-- Add spending form -->
             <div class="spending-forms-add">
                 <form method="POST" action="{{ url_for('add_spending') }}">
                     <input type="text" name="category" placeholder="Category" required>
                     <input type="number" step="0.01" name="amount" placeholder="Amount" required>
+
                     <label for="month">Month:</label>
                     <select name="month" id="month">
                         {% for m in range(1,13) %}
-                        <option value="{{ m }}" {% if m == selected_month %}selected{% endif %}>{{ m }}</option>
+                        <option value="{{ m }}" {% if m == selected_month %}selected{% endif %}>
+                            {{ m }}
+                        </option>
                         {% endfor %}
                     </select>
+
                     <label for="year">Year:</label>
                     <select name="year" id="year">
                         {% for y in range(2023, 2031) %}
-                        <option value="{{ y }}" {% if y == selected_year %}selected{% endif %}>{{ y }}</option>
+                        <option value="{{ y }}" {% if y == selected_year %}selected{% endif %}>
+                            {{ y }}
+                        </option>
                         {% endfor %}
                     </select>
+
                     <button type="submit">Add Spending</button>
                 </form>
             </div>
         </span>
+
+        <!-- Chart.js canvas -->
         <canvas id="spendingChart" width="400" height="200"></canvas>
-<!-- 
-        # <div class="delete-buttons">
-        #     {% for category in categories %}
-        #     <form method="POST" action="{{ url_for('delete', type='spending') }}">
-        #         <input type="hidden" name="filter_month" value="{{ selected_month }}">
-        #         <input type="hidden" name="filter_year" value="{{ selected_year }}">
-        #         <input type="hidden" name="category" value="{{ category }}">
-        #         <button type="submit" onclick="return confirm('Delete all spendings for {{ category }}?');">
-        #             Delete {{ category }}
-        #         </button>
-        #     </form>
-        #     {% endfor %}
 
-        # </div> -->
-
-
+        <!-- Chart.js CDN -->
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <!-- Spending bar chart -->
         <script>
         const ctx = document.getElementById('spendingChart').getContext('2d');
         const chart = new Chart(ctx, {
@@ -177,6 +225,8 @@
         });
         </script>
     </div>
+
+    <!-- Toggle left panel animation -->
     <script>
     const btn = document.getElementById("toggle-task");
     const panel = document.querySelector(".left-panel");
@@ -187,5 +237,6 @@
         dashboardContainer.classList.toggle("left-open");
     });
     </script>
+
 </div>
 {% endblock %}
