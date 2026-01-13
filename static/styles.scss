@@ -11,25 +11,31 @@ $bg-color: #0e0e0e;                    // near-black background
 
 body{
     background-color: $bg-color;
+    // Secondary heading styling (script-style font)
     h2{
-    font-family: "Dancing Script", cursive;
-    margin: 0;
-    padding: 0;
+        font-family: "Dancing Script", cursive;
+        margin: 0;
+        padding: 0;
     }
 
+    // Main heading styling (used on auth pages)
     h1{
-        color: #e8f5ee;                 // was #FDF8F4
+        color: #e8f5ee;                 // light text color for contrast
         display: inline-block;
-        background-color: #0f2a1d;      // was #D9A474
-        border-radius: 20px;
-        padding: 8px 116px;
+        background-color: #0f2a1d;      // dark green background
+        border-radius: 20px;            // rounded pill shape
+        padding: 8px 116px;             // wide horizontal padding
         margin: 5px;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,sans-serif;
     }
+
+    // Accent color for h2 headings
     h2{
-        color: #1db954;                 // was gold
+        color: #1db954;                 // primary accent green
     }
 }
+
+// Shared container styling for register, login, and edit pages
 .register-container, .login-container, .edit-container {
     align-items: center;
     justify-content: center;
@@ -41,11 +47,14 @@ body{
     top: 0;
     flex-direction: column;
     text-align: center;
+
+    // Error / feedback text
     p{
-        color: #ff4d4d;                 // slightly softened red
+        color: #ff4d4d;                 // softened error red
     }
 }
 
+// Container for submit buttons
 .button-container {
     margin: 0 auto;
     justify-content: center;
@@ -54,17 +63,19 @@ body{
     margin-top: 10px;
 }
 
+// Submit button base styling
 .button-container input[type="submit"] {
     width: 120px;
     padding: 8px 20px;
     border: none;
     border-radius: 6px;
-    background-color: $primary-color;  // was #4caf50
+    background-color: $primary-color;  // primary theme color
     color: #fff;
     cursor: pointer;
     font-size: 16px;
 }
 
+// Wrapper for form input fields
 .input-fields {
     align-items: center;
     display: flex;
@@ -72,17 +83,19 @@ body{
     gap: 12px;
     min-width: 250px;
     width: 100%;
-    background: #0e0e0e;                // was #ffffff
+    background: #0e0e0e;                // dark card background
     padding: 12px 20px;
     border-radius: 16px;
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
     transition: box-shadow 0.3s ease, transform 0.2s ease;
 
+    // Highlight container when any input is focused
     &:focus-within {
         box-shadow: 0 8px 20px rgba(29, 185, 84, 0.35);
         transform: translateY(-1px);
     }
 
+    // Input field styling
     input {
         width: 100%;
         padding: 10px 12px;
@@ -94,35 +107,42 @@ body{
         color: #ffffff;
         transition: border-color 0.3s ease;
 
+        // Input focus accent
         &:focus {
-        border-color: $primary-color;
+            border-color: $primary-color;
         }
     }
 }
 
+// Hover effect for submit buttons
 .button-container input[type="submit"]:hover {
     background-color: $primary-hover-color;
 }
+
+// Page heading styling for auth and edit pages
 .register-container h1 , .login-container h1 , .edit-container h1 {
     font-size: 56px;
     font-weight: 700;
     text-align: center;
     margin-bottom: 60px;
-    color: #e0e0e0;                     // was #333333
+    color: #e0e0e0;                     // soft white
     letter-spacing: 1px;
     line-height: 1.2;
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
 }
+
+// Extra width for edit page heading
 .edit-container h1{
     font-size: 56px;
     min-width: 400px;
-    }
+}
 
-
+// Main dashboard layout container
 .dashboard-container{
     display: flex;
     gap: 20px;
 
+    // Individual spending entry row
     .spending-item {
         display: flex;
         align-items: center;
@@ -130,21 +150,22 @@ body{
         padding: 6px;
     }
 
+    // Spending text label
     .spending-label {
         font-size: 16px;
-        color: #e6e6e6;                 // was #ffffff
+        color: #e6e6e6;                 // light text
         &:hover{
-            
-            }
+            // reserved for future hover effects
+        }
     }
 
+    // Delete button (hidden by default)
     .delete-spending-btn {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-
         padding: 4px;
-        opacity: 0;
+        opacity: 0;                     // hidden initially
         pointer-events: none;
         color: #ff4d4d;
         background: none;
@@ -156,25 +177,28 @@ body{
             opacity 0.4s ease-out;
     }
     
+    // Ensure SVG icons display correctly
     .delete-spending-btn svg{
         display: block;
     }
 
+    // Show delete button on hover
     .spending-item:hover .delete-spending-btn {
         opacity: 1;
         pointer-events: auto;
-        &:hover
-        {
+
+        &:hover{
             color: darken(#ff4d4d, 10%);
         }
     }
 
+    // Fixed logout button (top-right)
     .logout-btn {
         position: fixed;
         transform: translateY(0);
         top: 10px;
         right: 10px;
-        background: #7a1f1f;             // darker red
+        background: #7a1f1f;             // dark red
         border: none;
         padding: 10px 20px;
         border-radius: 10px;
@@ -186,62 +210,75 @@ body{
         text-align: center;
         text-height: 22px;
         box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1);
+
+        // Hover feedback
         &:hover {
             background-color: darken(#7a1f1f, 10%);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-            transform: translateY(3px)
+            transform: translateY(3px);
         }
     }
 
 
+
+    // Container for the toggle button that opens/closes the left panel
     .toggle-btn-container {
-        position: fixed;
-        transform: scale(1.5);
-        top: 50%;
-        left: -30px;
-        transform: translateY(-50%);
+        position: fixed;                     // Keeps button fixed on screen
+        transform: scale(1.5);               // Enlarges button container
+        top: 50%;                            // Vertically center on screen
+        left: -30px;                         // Slightly off-screen to the left
+        transform: translateY(-50%);         // Perfect vertical centering
         border: none;
         padding: 30px 30px;
         cursor: pointer;
-        z-index: 1100;
+        z-index: 1100;                       // Above the left panel
         font-size: 20px;
         transition: left 0.3s ease, transform 0.3s ease;
+
+        // Hover effect for the container
         &:hover {
             .toggle-btn {
-                background-color: darken($primary-color, 10%); // was darken(#C89163, 10%)
-                transform: scale(1.5);
+                background-color: darken($primary-color, 10%); // Darken on hover
+                transform: scale(1.5);                         // Emphasize button
                 transition: transform 0.3s ease, background-color 0.3s ease;
             }
         }
     }
+
+    // Actual toggle button styling
     .toggle-btn {
-        border-radius: 0 10px 10px 0;
+        border-radius: 0 10px 10px 0;         // Rounded right edge
         padding: 10px;
         font-size: 20px;
         border: none;
-        background: $primary-color; // was #C89163
+        background: $primary-color;           // Primary theme color
         transition: background-color 0.3s ease, transform 0.3s ease;
+
+        // Hover feedback for button
         &:hover
         {
             cursor: pointer;
-            background-color: darken($primary-color, 10%); // was darken(#C89163, 10%)
+            background-color: darken($primary-color, 10%);
         }
     }
+
+    // Left sliding panel container
     .left-panel {
         display: flex;
         flex-direction: column;
         align-items: center;
         position: fixed;
         top: 0;
-        left: -500px;
+        left: -500px;                         // Hidden off-screen by default
         width: 350px;
-        height: 100vh;
+        height: 100vh;                        // Full viewport height
         padding: 20px;
-        background-color: #0e0e0e; // was #fff
+        background-color: #0e0e0e;            // Dark theme background
         border-radius: 0 10px 10px 0;
-        transition: left 0.3s ease;
+        transition: left 0.3s ease;           // Smooth slide animation
         z-index: 1000;
 
+        // Form container for adding tasks
         .add-task-form {
             margin-top: 20px;
             width: 100%;
@@ -255,13 +292,17 @@ body{
             align-content: center;
             justify-content: center;
 
+            // Highlight form when any input is focused
             &:focus-within {
                 box-shadow: 0 6px 18px rgba(29, 185, 84, 0.35);
             }
 
+            // Shared styling for all form inputs
             input, textarea, select {
                 width: 100%;
             }
+
+            // Text input styling
             input[type="text"]{
                 max-width: 250px;
                 padding: 10px 12px;
@@ -273,11 +314,14 @@ body{
                 color: #ffffff;
                 transition: border-color 0.3s ease;
 
+                // Focus state for text input
                 &:focus {
-                    border-color: $primary-color; // was #4caf50
+                    border-color: $primary-color;
                 }    
             }
         }
+
+        // Submit button inside add-task form
         .add-task-form .add-task-btn {
             width: 100%;
             background: linear-gradient(135deg, $primary-color, lighten($primary-color, 10%));
@@ -291,18 +335,21 @@ body{
             transition: all 0.3s ease;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 
+            // Hover animation for button
             &:hover {
                 background: linear-gradient(135deg, lighten($primary-color, 10%), lighten($primary-color, 20%));
                 transform: translateY(-2px);
                 box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
             }
 
+            // Active (clicked) state
             &:active {
                 transform: translateY(0);
                 box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
             }
         }
 
+        // Container for task action buttons
         .task-controls {
             display: flex;
             flex-direction: column;
@@ -313,16 +360,18 @@ body{
             margin: 10px auto;
         }
 
+        // Panel open state (slides into view)
         &.open {
             left: 0px;
         }
 
+        // Delete task button styling
         .delete-task-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             padding: 6px 8px;
-            color: #ff4d4d;
+            color: #ff4d4d;                   // Red for delete action
             background: none;
             border: none;
             font-size: 56px;
@@ -331,18 +380,21 @@ body{
             border-radius: 6px;
             transition: color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 
+            // Hover feedback for delete button
             &:hover {
                 color: darken(#ff4d4d, 10%);
                 transform: translateY(-1px);
                 box-shadow: 0 2px 6px rgba(0,0,0,0.4);
             }
 
+            // Active click state
             &:active {
                 transform: translateY(0);
                 box-shadow: none;
             }
         }
 
+        // Main heading inside the panel
         h1 {
             display: inline-flex;
             text-align: center;
@@ -356,11 +408,13 @@ body{
             border: 10px solid #000000;
         }
 
+        // Shared text styling for panel content
         h4, td, th, p, li {
             color: $title-color-left;
             font-weight: 500;
             line-height: 1.5;
         }
+
 
 
 
